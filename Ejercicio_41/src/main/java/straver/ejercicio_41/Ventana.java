@@ -166,18 +166,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        double []Numeros=new double[50];
-        for (int i=0; i<lnum.getModel().getSize(); i++){
-            String S=lnum.getModel().getElementAt(i);
-            Numeros[i]=Double.parseDouble(S);
-        }
-        double mayor = Numeros[0];
-		for (int x = 1; x < Numeros.length; x++) {
-			if (Numeros[x] > mayor) {
-				mayor = Numeros[x];
-			}
-		}
-        txtMayor.setText(String.valueOf(mayor));
+        txtMayor.setText(String.valueOf(Calcular.NumMasGrande(lnum)));
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     /**

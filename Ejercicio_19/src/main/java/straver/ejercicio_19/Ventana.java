@@ -4,6 +4,8 @@
  */
 package straver.ejercicio_19;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author macui
@@ -16,7 +18,8 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        txtError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        setMinimumSize(new Dimension(450, 300));
         
         txtPerimetro.setEditable(false);
         txtAltura.setEditable(false);
@@ -43,6 +46,7 @@ public class Ventana extends javax.swing.JFrame {
         btnCalcular = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
+        txtError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +103,8 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        txtError.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,24 +112,25 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalcular))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLado, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtLado)
                             .addComponent(txtPerimetro)
                             .addComponent(txtAltura)
                             .addComponent(txtArea)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnBorrar)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnSalir)))
+                    .addComponent(txtError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -147,12 +154,14 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addComponent(txtError)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalcular)
-                    .addComponent(btnSalir)
-                    .addComponent(btnBorrar))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(btnCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
         );
 
         pack();
@@ -176,11 +185,35 @@ public class Ventana extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        double a;
-        a= Double.parseDouble(txtLado.getText());
-        txtPerimetro.setText(String.valueOf(Triangulo.calcularPerimetro(a)));
-        txtArea.setText(String.valueOf(Triangulo.calcularArea(a)));
-        txtAltura.setText(String.valueOf(Triangulo.calcularAltura(a)));
+        try {
+        String aStr=txtLado.getText();
+        if (aStr.isEmpty()){
+            throw new Exception("¡El campo está vacio!");
+        }
+        double a= Double.parseDouble(txtLado.getText());
+        double signo =Math.signum(a);
+        if (signo==-1.0){
+            throw new Exception("¡El número es negativo!");
+        }
+        if (signo==1.0 || signo==0){        
+            txtPerimetro.setText(String.valueOf(Triangulo.calcularPerimetro(a)));
+            txtArea.setText(String.valueOf(Triangulo.calcularArea(a)));
+            txtAltura.setText(String.valueOf(Triangulo.calcularAltura(a)));
+            txtError.setText("");
+        }
+        }catch (NumberFormatException nfe){
+            txtError.setText("El valor ingresado no es un número.");
+            txtLado.setText("");
+            txtAltura.setText("");
+            txtArea.setText("");
+            txtPerimetro.setText("");
+       }catch (Exception e){
+           txtError.setText(e.getMessage());
+           txtPerimetro.setText("");
+           txtArea.setText("");
+           txtAltura.setText("");
+       }
+    
         
     }//GEN-LAST:event_btnCalcularActionPerformed
 
@@ -242,6 +275,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtAltura;
     private javax.swing.JTextField txtArea;
+    private javax.swing.JLabel txtError;
     private javax.swing.JTextField txtLado;
     private javax.swing.JTextField txtPerimetro;
     // End of variables declaration//GEN-END:variables
