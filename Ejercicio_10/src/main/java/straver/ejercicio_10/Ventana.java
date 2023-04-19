@@ -43,7 +43,7 @@ public class Ventana extends javax.swing.JFrame {
         txtEstra = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtMatri = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCalcular = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -81,10 +81,10 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCalcularActionPerformed(evt);
             }
         });
 
@@ -122,7 +122,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(btnCalcular)
                             .addGap(50, 50, 50)
                             .addComponent(btnBorrar)
                             .addGap(40, 40, 40)
@@ -188,7 +188,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(txtMatri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnCalcular)
                     .addComponent(btnBorrar)
                     .addComponent(btnSalir))
                 .addGap(36, 36, 36))
@@ -197,7 +197,7 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
         double patrimonio, estrato, codigo;
         codigo=Double.parseDouble(txtNum.getText());
@@ -206,7 +206,7 @@ public class Ventana extends javax.swing.JFrame {
         txtMatri.setText(String.valueOf(Matricula.valor(patrimonio, estrato)));
         txtNum2.setText(txtNum.getText());
         txtNombre2.setText(txtNombre.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
@@ -278,8 +278,8 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
